@@ -1,0 +1,80 @@
+[plugin]
+enabled = true
+config_version = "1.0.0"
+timezone = "Asia/Shanghai"
+state_file = "data/state.json"
+cooldown_file = "data/cooldowns.json"
+log_parse_failures = false
+
+[commands]
+summary_aliases = ["j"]
+show_permission_denied_message = true
+show_rate_limit_message = true
+
+[permissions]
+allowed_groups = ["961866495"]
+blocked_users = []
+admin_users = ["332808108"]
+block_query = false
+block_update = true
+
+[rate_limit]
+enable_query_limit = false
+enable_update_limit = true
+query_cooldown_seconds = 10
+update_cooldown_seconds = 10
+scope = "per_user"
+
+[templates]
+single_open_with_data = """当前{arcade_name}人数为{count}
+登记人：{user_name}（{user_qq}）
+更新时间：{updated_time}"""
+single_open_no_data = "{arcade_name}当前无数据"
+single_closed = "{arcade_name}已闭店"
+single_not_open = "{arcade_name}未开店"
+update_success = """已更新{arcade_name}人数为{count}
+登记人：{user_name}（{user_qq}）
+更新时间：{updated_time}"""
+permission_denied = "你无权限使用此功能"
+rate_limited = "操作过快，请 {remaining_seconds} 秒后再试"
+summary_wrapper = """排卡信息
+{all_lines}"""
+summary_line_open_with_data = "{arcade_name}：{count}人（{user_name} {user_qq}，{updated_time} 更新）"
+summary_line_open_no_data = "{arcade_name}：无数据"
+summary_line_closed = "{arcade_name}：已闭店"
+summary_line_not_open = "{arcade_name}：未开店"
+clear_success = "已清空{arcade_name}的数据"
+clear_all_success = "已清空全部机厅数据"
+admin_denied = "你没有管理员权限"
+
+[[arcades]]
+name = "嘉定信业店"
+enabled = true
+query_aliases = ["xyj"]
+update_aliases = ["xy"]
+open_time = "10:00"
+close_time = "22:00"
+
+[[arcades]]
+name = "嘉定宝龙店"
+enabled = true
+query_aliases = ["blj"]
+update_aliases = ["bl"]
+open_time = "10:00"
+close_time = "22:00"
+
+[[arcades]]
+name = "六代"
+enabled = true
+query_aliases = ["ldj"]
+update_aliases = ["ld"]
+open_time = "10:00"
+close_time = "22:00"
+
+[[arcades]]
+name = "印象城"
+enabled = true
+query_aliases = ["yxcj"]
+update_aliases = ["yxc"]
+open_time = "10:00"
+close_time = "22:00"

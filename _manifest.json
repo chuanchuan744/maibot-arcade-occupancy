@@ -1,0 +1,35 @@
+{
+  "manifest_version": 2,
+  "id": "chuanchuan744.arcade-occupancy",
+  "version": "0.1.0",
+  "name": "机厅人数登记",
+  "description": "登记和查询群聊内多个机厅的当前排卡人数，支持群聊白名单、用户黑名单、营业时间、限速、管理员清空和自定义回复模板。",
+  "author": {
+    "name": "chuanchuan",
+    "url": "https://github.com/chuanchuan744"
+  },
+  "license": "MIT",
+  "urls": {
+    "repository": "https://github.com/chuanchuan744/maibot-arcade-occupancy",
+    "homepage": "https://github.com/chuanchuan744/maibot-arcade-occupancy",
+    "documentation": "https://github.com/chuanchuan744/maibot-arcade-occupancy#readme"
+  },
+  "host_application": {
+    "min_version": "1.0.0",
+    "max_version": "1.99.99"
+  },
+  "sdk": {
+    "min_version": "2.0.0",
+    "max_version": "2.99.99"
+  },
+  "capabilities": [
+    "send.text",
+    "config.get"
+  ],
+  "i18n": {
+    "default_locale": "zh-CN",
+    "supported_locales": [
+      "zh-CN"
+    ]
+  }
+}
