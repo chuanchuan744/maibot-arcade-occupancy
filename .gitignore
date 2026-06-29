@@ -12,3 +12,9 @@
 
 pkg/
 src/
+
+__pycache__/
+*.py[cod]
+data/
+config_back/
+.DS_Store

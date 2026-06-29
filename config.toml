@@ -2,8 +2,8 @@
 enabled = true
 config_version = "1.0.0"
 timezone = "Asia/Shanghai"
-state_file = "data/state.json"
-cooldown_file = "data/cooldowns.json"
+state_file = "state.json"
+cooldown_file = "cooldowns.json"
 log_parse_failures = false
 
 [commands]
@@ -12,9 +12,9 @@ show_permission_denied_message = true
 show_rate_limit_message = true
 
 [permissions]
-allowed_groups = ["961866495"]
+allowed_groups = []
 blocked_users = []
-admin_users = ["332808108"]
+admin_users = []
 block_query = false
 block_update = true
 

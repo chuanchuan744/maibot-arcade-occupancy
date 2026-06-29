@@ -42,11 +42,13 @@ close_time = "22:00"
 
 ## 常用配置
 
+`allowed_groups` 和 `admin_users` 默认为空，部署时请按自己的 QQ 群号和管理员 QQ 号填写。
+
 ```toml
 [permissions]
-allowed_groups = ["961866495"]
+allowed_groups = []
 blocked_users = []
-admin_users = ["332808108"]
+admin_users = []
 block_query = false
 block_update = true
 

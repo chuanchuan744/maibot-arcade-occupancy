@@ -24,7 +24,9 @@
   },
   "capabilities": [
     "send.text",
-    "config.get"
+    "config.get",
+    "logger.info",
+    "paths.data_dir"
   ],
   "i18n": {
     "default_locale": "zh-CN",
