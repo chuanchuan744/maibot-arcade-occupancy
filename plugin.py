@@ -378,8 +378,8 @@ class PluginSection(PluginConfigBase):
     enabled: bool = Field(default=True)
     config_version: str = Field(default="1.0.0")
     timezone: str = Field(default="Asia/Shanghai")
-    state_file: str = Field(default="data/state.json")
-    cooldown_file: str = Field(default="data/cooldowns.json")
+    state_file: str = Field(default="state.json")
+    cooldown_file: str = Field(default="cooldowns.json")
     log_parse_failures: bool = Field(default=False)
 
 
@@ -392,7 +392,7 @@ class CommandsSection(PluginConfigBase):
 class PermissionsSection(PluginConfigBase):
     allowed_groups: list[str] = Field(default_factory=list)
     blocked_users: list[str] = Field(default_factory=list)
-    admin_users: list[str] = Field(default_factory=lambda: ["332808108"])
+    admin_users: list[str] = Field(default_factory=list)
     block_query: bool = Field(default=False)
     block_update: bool = Field(default=True)
 
@@ -492,10 +492,25 @@ class ArcadeOccupancyPlugin(MaiBotPlugin):
         self._state_store: JsonStateStore | None = None
         self._cooldown_store: JsonCooldownStore | None = None
 
+    def _data_dir(self) -> Path:
+        ctx = getattr(self, "ctx", None)
+        paths = getattr(ctx, "paths", None)
+        data_dir = getattr(paths, "data_dir", None)
+        if data_dir:
+            return Path(data_dir)
+        return Path(__file__).resolve().parent / "data"
+
+    def _resolve_data_file(self, configured_path: str) -> Path:
+        path = Path(configured_path)
+        if path.is_absolute():
+            return path
+        if path.parts and path.parts[0] == "data":
+            path = Path(*path.parts[1:])
+        return self._data_dir() / path
+
     async def on_load(self) -> None:
-        base_dir = Path(__file__).resolve().parent
-        state_path = base_dir / self.config.plugin.state_file
-        cooldown_path = base_dir / self.config.plugin.cooldown_file
+        state_path = self._resolve_data_file(self.config.plugin.state_file)
+        cooldown_path = self._resolve_data_file(self.config.plugin.cooldown_file)
         self._state_store = JsonStateStore(state_path)
         self._cooldown_store = JsonCooldownStore(cooldown_path)
         if hasattr(self, "ctx") and hasattr(self.ctx, "logger"):
