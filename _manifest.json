@@ -24,7 +24,6 @@
   },
   "capabilities": [
     "send.text",
-    "config.get",
     "logger.info",
     "paths.data_dir"
   ],

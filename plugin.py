@@ -497,16 +497,20 @@ class ArcadeOccupancyPlugin(MaiBotPlugin):
         paths = getattr(ctx, "paths", None)
         data_dir = getattr(paths, "data_dir", None)
         if data_dir:
-            return Path(data_dir)
-        return Path(__file__).resolve().parent / "data"
+            return Path(data_dir).resolve()
+        return (Path(__file__).resolve().parent / "data").resolve()
 
     def _resolve_data_file(self, configured_path: str) -> Path:
         path = Path(configured_path)
-        if path.is_absolute():
-            return path
         if path.parts and path.parts[0] == "data":
             path = Path(*path.parts[1:])
-        return self._data_dir() / path
+        data_dir = self._data_dir()
+        resolved_path = (path if path.is_absolute() else data_dir / path).resolve()
+        try:
+            resolved_path.relative_to(data_dir)
+        except ValueError as exc:
+            raise ValueError("Persistent data files must stay inside data_dir") from exc
+        return resolved_path
 
     async def on_load(self) -> None:
         state_path = self._resolve_data_file(self.config.plugin.state_file)
